@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')
 
 module.exports = (app) => {
     //Passport config
@@ -23,6 +24,7 @@ module.exports = (app) => {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
     }))
 
     //Passport middlewares
