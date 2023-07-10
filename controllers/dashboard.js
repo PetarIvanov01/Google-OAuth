@@ -7,7 +7,10 @@ router.get('/', hasUser, (req, res) => {
 })
 
 router.get('/dashboard', hasUser, (req, res) => {
-    res.render('dashboard');
+    
+    res.render('dashboard',{
+        name: req.user.username
+    });
 })
 
 //Rendering stories page

@@ -25,9 +25,9 @@ module.exports = (passport) => {
     passport.serializeUser(function (user, cb) {
         process.nextTick(function () {
             return cb(null, {
-                id: user.id,
-                username: user.username,
-                picture: user.picture
+                id: user._id,
+                username: user.firstName,
+                picture: user.image
             });
         });
     });
