@@ -1,21 +1,24 @@
 const router = require('express').Router();
 const { hasUser } = require('../middlewares/guards');
+const { getAllStories } = require('../services/storyService');
 
 //Rendering dashboard page
 router.get('/', hasUser, (req, res) => {
     res.render('home');
 })
 
-router.get('/dashboard', hasUser, (req, res) => {
-    
-    res.render('dashboard',{
-        name: req.user.username
-    });
-})
+router.get('/dashboard', hasUser, async (req, res) => {
 
-//Rendering stories page
-router.get('/stories', hasUser, (req, res) => {
-    res.render('stories');
+    try {
+        const stories = await getAllStories(req.user.id);
+
+        res.render('dashboard', {
+            name: req.user.username,
+            stories
+        });
+    } catch (error) {
+        res.render('error/500');
+    }
 })
 
 
