@@ -3,12 +3,7 @@ const { hasUser } = require('../middlewares/guards');
 const { getAllStories } = require('../services/storyService');
 
 //Rendering dashboard page
-router.get('/', hasUser, (req, res) => {
-    res.render('home');
-})
-
-router.get('/dashboard', hasUser, async (req, res) => {
-
+router.get('/', hasUser, async (req, res) => {
     try {
         const stories = await getAllStories(req.user.id);
 
@@ -20,8 +15,5 @@ router.get('/dashboard', hasUser, async (req, res) => {
         res.render('error/500');
     }
 })
-
-
-
 
 module.exports = router

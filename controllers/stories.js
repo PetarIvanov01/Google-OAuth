@@ -11,7 +11,7 @@ router.post('/create', hasUser, async (req, res) => {
         req.body.user = req.user.id;
         await createStories(req.body)
 
-        res.redirect('/dashboard');
+        res.redirect('/');
 
     } catch (error) {
         console.error(error);
@@ -104,7 +104,7 @@ router.put('/:id', hasUser, async (req, res) => {
             story = await updateStory(req.params.id, req.body);
 
         }
-        res.redirect('/dashboard');
+        res.redirect('/');
 
     } catch (error) {
         console.error(error)
@@ -116,7 +116,7 @@ router.put('/:id', hasUser, async (req, res) => {
 router.delete('/:id', hasUser, async (req, res) => {
     try {
         await deleteStory(req.params.id);
-        res.redirect('/dashboard');
+        res.redirect('/');
     } catch (error) {
         console.error(error)
         return res.render('error/500');
